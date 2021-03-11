@@ -1,7 +1,7 @@
-# rollup-plugin-build
+# rollup-quantum-build
 
 ```
-import { build } from '@javascribble/rollup-plugin-build';
+import { build } from '@javascribble/rollup-quantum-build';
 
 export default build({
   input: './',

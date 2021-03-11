@@ -1,7 +1,7 @@
 {
-    "name": "@javascribble/rollup-plugin-build",
+    "name": "@javascribble/rollup-quantum-build",
     "description": "",
-    "version": "1.0.1",
+    "version": "0.0.0",
     "license": "MIT",
     "devDependencies": {
         "@babel/core": "^7.12.10",
@@ -21,19 +21,14 @@
         "postversion": "npm publish --access public",
         "start": "rollup -c package.js"
     },
-    "homepage": "https://github.com/javascribble/rollup-plugin-build#readme",
+    "homepage": "https://github.com/javascribble/rollup-quantum-build#readme",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/javascribble/rollup-plugin-build.git"
+        "url": "git+https://github.com/javascribble/rollup-quantum-build.git"
     },
     "bugs": {
-        "url": "https://github.com/javascribble/rollup-plugin-build/issues"
+        "url": "https://github.com/javascribble/rollup-quantum-build/issues"
     },
-    "keywords": [
-        "rollup-plugin",
-        "rollup",
-        "plugin"
-    ],
     "files": [
         "source"
     ]
