@@ -1,5 +1,5 @@
 {
-    "name": "@javascribble/rollup-quantum-build",
+    "name": "@javascribble/rollup-plugin-build",
     "description": "",
     "version": "1.0.0",
     "license": "MIT",
