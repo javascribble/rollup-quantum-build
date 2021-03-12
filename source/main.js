@@ -1,39 +1,35 @@
-import babel from '@rollup/plugin-babel';
-import postcss from 'rollup-plugin-postcss';
-import commonjs from '@rollup/plugin-commonjs';
-import resolve from '@rollup/plugin-node-resolve';
-import { terser } from "rollup-plugin-terser";
-import { minify } from 'html-minifier';
+const postcss = require('rollup-plugin-postcss');
+const commonjs = require('@rollup/plugin-commonjs');
+const { nodeResolve } = require('@rollup/plugin-node-resolve');
+const { babel } = require('@rollup/plugin-babel');
+const { terser } = require("rollup-plugin-terser");
+const { minify } = require('html-minifier');
+const { rollup } = require('rollup');
 
-const debug = process.argv.includes('-w');
-const postcssOptions = { extract: 'main.css', minimize: !debug };
-const minifyOptions = { minifyCSS: true, minifyJS: true, collapseWhitespace: true };
-const babelOptions = { babelHelpers: 'bundled', plugins: ["@babel/plugin-syntax-class-properties"] };
+const [input, output] = process.argv.slice(-2);
 
-const minifyPlugin = {
-    name: 'minify',
-    transform(text, path) {
-        if (path.includes('template')) {
-            return minify(text, minifyOptions);
+const inputOptions = {
+    input,
+    plugins: [
+        commonjs(),
+        nodeResolve(),
+        babel({ babelHelpers: 'bundled', plugins: ["@babel/plugin-syntax-class-properties"] }),
+        postcss({ extract: 'main.css', minimize: true }),
+        terser(),
+        {
+            name: 'minify',
+            transform(text, path) {
+                if (path.includes('template')) {
+                    return minify(text, { minifyCSS: true, minifyJS: true, collapseWhitespace: true });
+                }
+            }
         }
-    }
+    ]
 };
 
-const developmentPlugins = [];
-const productionPlugins = [minifyPlugin, terser()];
-const plugins = [
-    resolve(),
-    commonjs(),
-    babel(babelOptions),
-    postcss(postcssOptions),
-    ...(debug ? developmentPlugins : productionPlugins)
-];
+const outputOptions = {
+    file: `${output}/main.js`,
+    format: 'es'
+};
 
-export default (input, output) => ({
-    plugins,
-    input,
-    output: {
-        file: `${output}/main.js`,
-        format: 'es'
-    }
-});
+rollup(inputOptions).then(bundle => bundle.write(outputOptions).then(() => bundle.close()));
