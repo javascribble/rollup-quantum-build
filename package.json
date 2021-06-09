@@ -18,8 +18,9 @@
     },
     "main": "./source/main.js",
     "scripts": {
-        "postversion": "npm publish --access public",
-        "start": "node ./source/main.js ./test/main.js ./build"
+        "start": "node ./source/main.js",
+		"build": "node ./source/main.js ./test/main.js ./build",
+		"postversion": "npm publish --access public"
     },
     "homepage": "https://github.com/javascribble/rollup-quantum-build#readme",
     "repository": {
