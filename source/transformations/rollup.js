@@ -4,10 +4,18 @@ const { babel } = require('@rollup/plugin-babel');
 const { terser } = require("rollup-plugin-terser");
 const { minify } = require('html-minifier');
 const { rollup } = require('rollup');
+const fs = require('fs');
 
 const executeRollup = (input, output) => {
+    const bundles = [];
+    const bundlePath = `${input}/bundles`;
+    if (fs.existsSync(bundlePath)) {
+        fs.readdirSync(bundlePath).forEach(file => bundles.push(`${bundlePath}/${file}`));
+    }
+
     const inputOptions = {
-        input: `${input}/main.js`,
+        input: [`${input}/main.js`, ...bundles],
+        preserveEntrySignatures: false,
         plugins: [
             commonjs(),
             nodeResolve(),
@@ -25,7 +33,7 @@ const executeRollup = (input, output) => {
     };
 
     const outputOptions = {
-        file: `${output}/main.js`,
+        dir: output,
         format: 'es'
     };
 

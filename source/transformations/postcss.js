@@ -4,8 +4,9 @@ const postcssImport = require('postcss-import');
 const fs = require('fs');
 
 const executePostcss = (input, output) => {
-    const inputFile = `${input}/main.css`;
-    const outputFile = `${output}/main.css`;
+    const filename = 'main.css';
+    const inputFile = `${input}/${filename}`;
+    const outputFile = `${output}/${filename}`;
 
     if (fs.existsSync(inputFile)) {
         const options = {
@@ -13,9 +14,7 @@ const executePostcss = (input, output) => {
             to: outputFile
         };
 
-        const writeFile = result => {
-            fs.writeFile(outputFile, result.css, () => true)
-        };
+        const writeFile = result => fs.writeFile(outputFile, result.css, () => true);
 
         const processCSS = (error, css) => {
             if (error) {
