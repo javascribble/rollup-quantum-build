@@ -14,7 +14,7 @@ const inputOptions = {
         commonjs(),
         nodeResolve(),
         babel({ babelHelpers: 'bundled', plugins: ["@babel/plugin-syntax-class-properties"] }),
-        postcss({ extract: 'main.css', minimize: true }),
+        postcss({ extract: 'main.css', modules: true, minimize: true }),
         terser(),
         {
             name: 'minify',
