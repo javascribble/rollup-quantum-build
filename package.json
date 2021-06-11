@@ -1,7 +1,7 @@
 {
     "name": "@javascribble/rollup-quantum-build",
     "description": "",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "license": "MIT",
     "dependencies": {
         "@babel/core": "^7.12.10",
@@ -19,8 +19,8 @@
     "main": "./source/main.js",
     "scripts": {
         "start": "node ./source/main.js",
-		"build": "node ./source/main.js ./test/main.js ./build",
-		"postversion": "npm publish --access public"
+        "build": "node ./source/main.js ./test/main.js ./build",
+        "postversion": "npm publish --access public"
     },
     "homepage": "https://github.com/javascribble/rollup-quantum-build#readme",
     "repository": {
