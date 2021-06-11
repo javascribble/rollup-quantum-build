@@ -1,5 +1,6 @@
-const postcss = require('rollup-plugin-postcss');
 const commonjs = require('@rollup/plugin-commonjs');
+const postcss = require('rollup-plugin-postcss');
+const postcssImport = require('postcss-import');
 const { nodeResolve } = require('@rollup/plugin-node-resolve');
 const { babel } = require('@rollup/plugin-babel');
 const { terser } = require("rollup-plugin-terser");
@@ -14,7 +15,7 @@ const inputOptions = {
         commonjs(),
         nodeResolve(),
         babel({ babelHelpers: 'bundled', plugins: ["@babel/plugin-syntax-class-properties"] }),
-        postcss({ extract: 'main.css', modules: true, minimize: true }),
+        postcss({ extract: 'main.css', modules: true, minimize: true, plugins: [postcssImport()] }),
         terser(),
         {
             name: 'minify',
