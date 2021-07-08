@@ -7,41 +7,37 @@ const { rollup } = require('rollup');
 const fs = require('fs');
 
 const executeRollup = (input, output) => {
-    fs.readdirSync(output).forEach(file => fs.unlinkSync(`${output}/${file}`));
-
-    const inputs = [];
-    for (const configuration of ['extensions', 'plugins']) {
-        const configurationPath = `${input}/${configuration}`;
-        if (fs.existsSync(configurationPath)) {
-            fs.readdirSync(configurationPath).forEach(file => inputs.push(`${configurationPath}/${file}`));
+    if (fs.existsSync(input)) {
+        if (!fs.existsSync(output)) {
+            fs.mkdirSync(output);
         }
-    }
 
-    const inputOptions = {
-        input: [`${input}/main.js`, ...inputs],
-        preserveEntrySignatures: false,
-        plugins: [
-            commonjs(),
-            nodeResolve(),
-            babel({ babelHelpers: 'bundled', plugins: ["@babel/plugin-syntax-class-properties"] }),
-            terser(),
-            {
-                name: 'minify',
-                transform(text, path) {
-                    if (path.includes('template')) {
-                        return minify(text, { minifyCSS: true, minifyJS: true, collapseWhitespace: true });
+        const inputOptions = {
+            input: fs.readdirSync(input).filter(file => file.endsWith('.js')).map(file => `${input}/${file}`),
+            preserveEntrySignatures: false,
+            plugins: [
+                commonjs(),
+                nodeResolve(),
+                babel({ babelHelpers: 'bundled', plugins: ["@babel/plugin-syntax-class-properties"] }),
+                terser(),
+                {
+                    name: 'minify',
+                    transform(text, path) {
+                        if (path.includes('template')) {
+                            return minify(text, { minifyCSS: true, minifyJS: true, collapseWhitespace: true });
+                        }
                     }
                 }
-            }
-        ]
-    };
+            ]
+        };
 
-    const outputOptions = {
-        dir: output,
-        format: 'es'
-    };
+        const outputOptions = {
+            dir: output,
+            format: 'es'
+        };
 
-    rollup(inputOptions).then(bundle => bundle.write(outputOptions).then(() => bundle.close()));
+        rollup(inputOptions).then(bundle => bundle.write(outputOptions).then(() => bundle.close()));
+    }
 };
 
 module.exports = { executeRollup };
