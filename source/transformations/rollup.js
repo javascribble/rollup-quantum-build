@@ -7,14 +7,18 @@ const { rollup } = require('rollup');
 const fs = require('fs');
 
 const executeRollup = (input, output) => {
-    const bundles = [];
-    const bundlePath = `${input}/bundles`;
-    if (fs.existsSync(bundlePath)) {
-        fs.readdirSync(bundlePath).forEach(file => bundles.push(`${bundlePath}/${file}`));
+    fs.readdirSync(output).forEach(file => fs.unlinkSync(`${output}/${file}`));
+
+    const inputs = [];
+    for (const configuration of ['extensions', 'plugins']) {
+        const configurationPath = `${input}/${configuration}`;
+        if (fs.existsSync(configurationPath)) {
+            fs.readdirSync(configurationPath).forEach(file => inputs.push(`${configurationPath}/${file}`));
+        }
     }
 
     const inputOptions = {
-        input: [`${input}/main.js`, ...bundles],
+        input: [`${input}/main.js`, ...inputs],
         preserveEntrySignatures: false,
         plugins: [
             commonjs(),
