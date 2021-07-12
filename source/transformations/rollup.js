@@ -21,6 +21,10 @@ const executeRollup = (input, output) => {
                     if (path.includes('template')) {
                         return minify(text, { minifyCSS: true, minifyJS: true, collapseWhitespace: true });
                     }
+
+                    // if (path.endsWith('.html')) {
+                    //     return 'export default `' + minify(text, { minifyCSS: true, minifyJS: true, collapseWhitespace: true }) + '`;';
+                    // }
                 }
             }
         ]

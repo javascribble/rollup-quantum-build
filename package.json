@@ -1,6 +1,6 @@
 {
     "name": "@javascribble/rollup-quantum-build",
-    "description": "",
+    "description": "runs a simple rollup build on quantum elements",
     "version": "1.5.4",
     "license": "MIT",
     "dependencies": {
@@ -20,7 +20,6 @@
     "main": "./source/main.js",
     "scripts": {
         "start": "node ./source/main.js",
-        "build": "node ./source/main.js ./test/main.js ./build",
         "postversion": "npm publish --access public"
     },
     "homepage": "https://github.com/javascribble/rollup-quantum-build#readme",
