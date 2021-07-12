@@ -1,7 +1,7 @@
 {
     "name": "@javascribble/rollup-quantum-build",
     "description": "runs a simple rollup build on quantum elements",
-    "version": "1.5.4",
+    "version": "1.5.5",
     "license": "MIT",
     "dependencies": {
         "@babel/core": "^7.12.10",
