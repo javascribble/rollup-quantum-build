@@ -1,24 +1,25 @@
 {
     "name": "@javascribble/rollup-quantum-build",
-    "description": "runs a simple rollup build on quantum elements",
+    "description": "runs a simple rollup build",
     "version": "1.6.0",
     "license": "MIT",
     "dependencies": {
-        "@babel/core": "^7.12.10",
-        "@babel/plugin-syntax-class-properties": "^7.12.1",
-        "@rollup/plugin-babel": "^5.2.2",
-        "@rollup/plugin-commonjs": "^14.0.0",
-        "@rollup/plugin-node-resolve": "^8.4.0",
-        "babel-preset-minify": "^0.5.1",
-        "cssnano": "^5.0.6",
-        "html-minifier": "^4.0.0",
-        "postcss": "^8.2.8",
-        "postcss-import": "^14.0.2",
-        "rollup": "^2.36.2",
-        "rollup-plugin-terser": "^7.0.2"
+        "@babel/core": "*",
+        "@babel/plugin-syntax-class-properties": "*",
+        "@rollup/plugin-babel": "*",
+        "@rollup/plugin-commonjs": "*",
+        "@rollup/plugin-node-resolve": "*",
+        "babel-preset-minify": "*",
+        "cssnano": "*",
+        "html-minifier": "*",
+        "postcss": "*",
+        "postcss-import": "*",
+        "rollup": "*",
+        "rollup-plugin-terser": "*"
     },
     "main": "./source/main.js",
     "scripts": {
+		"build": "npm start ./",
         "start": "node ./source/main.js",
         "postversion": "npm publish --access public"
     },
@@ -31,6 +32,7 @@
         "url": "https://github.com/javascribble/rollup-quantum-build/issues"
     },
     "files": [
+		"bundles",
         "source"
     ]
 }
